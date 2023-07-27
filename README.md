@@ -5,6 +5,8 @@ Projeto de Fluxo de Caixa simplificado.
 
 # Visão de negócio
 
+Nesta seção veremos a análise da solução sob um ponto de vista de negócio.
+
 ## Requisitos funcionais
 * Fazer lançamentos de crédito e débito em um caixa;
 * Ter um relatório com o consolidado diário das movimentações no caixa;
@@ -16,8 +18,7 @@ Projeto de Fluxo de Caixa simplificado.
 * Segurança;
 
 ## Análise sobre os dados
-
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/001.png)
 
 Os dados da solução estão representados pelas seguintes entidades:
 
@@ -74,8 +75,20 @@ Uma conta pode ser consultada, cadastrada, editada ou inativada. Não é possív
 Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a descrição e o valor do lançamento. Todos os lançamentos são feitos no dia corrente.
 
 > **Regra**: Para fazer um lançamento, a conta precisa estar ATIVA;
+
 > **Regra**: Um lançamento de débito não pode ser maior que o saldo em conta;
+
 > **Regra**: Um lançamento só pode ser realizado enquanto o dia está em aberto. Uma vez consolidado não é possíve fazer lançamentos naquele dia.
+
+### Remover um crédito ou débito
+Um lançamento de crédito ou débito pode ser removido. É preciso informar o ID único e o ID da transação do lançamento.
+
+Nestes casos a aplicação fará o seguinte:
+
+* Para remoção de lançamento de crédito, irá cancelar a transação e criar um lançamento de débito para balancear o saldo.
+* Para remoção de lançamento de débito, irá cancelar a transação e criar um lançamento de crédito para balancear o saldo.
+
+> **Regra**: Uma vez cancelado, um lançamento não pode ser mais removido;
 
 ### Consultar relatório de consolidado diário
 É possível consultar os dados do consolidado diário. Os filtros disponíveis são:
@@ -92,9 +105,11 @@ Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a d
 
 # Visão Técnica
 
+Nesta seção, iremos conferir a visão técnica da solução.
+
 ## Arquitetura de Referência
 
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/002.png)
 
 ## Componentes
 
@@ -123,8 +138,10 @@ A solução possui um log em arquivo que registra todos os erros, exceções e i
 
 ## Estrutura da Solução
 
+O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do código e sua escala de crescimento no médio/longo prazo. A proposta foca em isolar as regras de negócio no contexto de domínio enquanto que os demais componentes servem como orquestradores das funcionalidades.
+
 ## Arquitetura em Camadas
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/003.png)
 
 * API
 * Data Transfer
@@ -145,3 +162,13 @@ IMAGEM
 | Testes | Camada responsável por conter os testes unitários de domínio. |
 
 **Exemplo:**
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/004.png)
+
+Neste exemplo temos a relação entre as classes na composição das camadas.
+
+# Endpoints da API
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/005.png)
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/006.png)
