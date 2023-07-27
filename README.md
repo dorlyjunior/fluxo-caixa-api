@@ -16,8 +16,7 @@ Projeto de Fluxo de Caixa simplificado.
 * Segurança;
 
 ## Análise sobre os dados
-
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/001.png)
 
 Os dados da solução estão representados pelas seguintes entidades:
 
@@ -74,7 +73,9 @@ Uma conta pode ser consultada, cadastrada, editada ou inativada. Não é possív
 Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a descrição e o valor do lançamento. Todos os lançamentos são feitos no dia corrente.
 
 > **Regra**: Para fazer um lançamento, a conta precisa estar ATIVA;
+
 > **Regra**: Um lançamento de débito não pode ser maior que o saldo em conta;
+
 > **Regra**: Um lançamento só pode ser realizado enquanto o dia está em aberto. Uma vez consolidado não é possíve fazer lançamentos naquele dia.
 
 ### Consultar relatório de consolidado diário
@@ -94,7 +95,7 @@ Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a d
 
 ## Arquitetura de Referência
 
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/002.png)
 
 ## Componentes
 
@@ -123,8 +124,10 @@ A solução possui um log em arquivo que registra todos os erros, exceções e i
 
 ## Estrutura da Solução
 
+O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do código e sua escala de crescimento no médio/longo prazo. A proposta foca em isolar as regras de negócio no contexto de domínio enquanto que os demais componentes servem como orquestradores das funcionalidades.
+
 ## Arquitetura em Camadas
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/003.png)
 
 * API
 * Data Transfer
@@ -145,3 +148,13 @@ IMAGEM
 | Testes | Camada responsável por conter os testes unitários de domínio. |
 
 **Exemplo:**
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/004.png)
+
+Neste exemplo temos a relação entre as classes na composição das camadas.
+
+# Endpoints da API
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/005.png)
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/006.png)
