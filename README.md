@@ -2,6 +2,9 @@
 Projeto de Fluxo de Caixa simplificado.
 
 # Instruções de Uso
+* Os Scripts do banco de dados estão em DB/scripts;
+* O schema é o **public** padrão do Postgres;
+* A API é uma aplicação .NET Core e pode ser rodada no Visual Studio ou VS Code via linha comando.
 
 # Visão de negócio
 
@@ -166,6 +169,10 @@ O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/004.png)
 
 Neste exemplo temos a relação entre as classes na composição das camadas.
+
+## Diagrama Relacional de Dados
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/develop/DB/scripts/diagrama-relacional.png)
 
 # Endpoints da API
 
