@@ -43,6 +43,8 @@ namespace FluxoCaixa.Projeto.Dominio.Caixa.Contas.Entidades
         
         public virtual void DecrementarSaldo(decimal valor)
         {
+            if (Saldo < valor) throw new RegraDeNegocioExcecao("O saldo não pode ficar negativo.");
+
             Saldo -= valor;
         }
 

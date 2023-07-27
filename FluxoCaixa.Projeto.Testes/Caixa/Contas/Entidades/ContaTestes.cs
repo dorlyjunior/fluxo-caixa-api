@@ -76,5 +76,141 @@ namespace FluxoCaixa.Projeto.Testes.Caixa.Contas.Entidades
                 sut.Invoking(p => p.SetNome(nome)).Should().Throw<TamanhoMaximoExcecao>();
             }
         }
+
+        public class SetSaldoMetodo : ContaTestes
+        {
+            [Fact]
+            public void Dado_ValorMenorQueZero_Espero_AtributoObrigatorioExcecao()
+            {
+                decimal valor = -50; 
+
+                sut.Invoking(p => p.SetSaldo(valor)).Should().Throw<RegraDeNegocioExcecao>();
+            }
+
+            [Theory]
+            [InlineData(0)]
+            [InlineData(10)]
+            [InlineData(100)]
+            public void Dado_ValorMaiorQueZero_Espero_SaldoValido(int valor)
+            {
+                sut.Invoking(p => p.SetSaldo(valor)).Should().NotThrow<RegraDeNegocioExcecao>();
+            }
+        }
+
+        public class SetIncrementarSaldoMetodo : ContaTestes
+        {
+            [Fact]
+            public void Dado_Valor_Espero_SaldoIncrementado()
+            {
+                decimal valor = 100;
+                decimal saldo = 100;
+
+                sut.SetSaldo(saldo);
+                sut.IncrementarSaldo(valor);
+
+                sut.Saldo.Should().Be(saldo+valor);
+            }
+        }
+
+        public class SetDecrementarSaldoMetodo : ContaTestes
+        {
+            [Fact]
+            public void Dado_Valor_Espero_SaldoIncrementado()
+            {
+                decimal saldo = 100;
+                decimal valor = 100;
+
+                sut.SetSaldo(saldo);
+                sut.DecrementarSaldo(valor);
+
+                sut.Saldo.Should().Be(0);
+            }
+
+            [Fact]
+            public void Dado_ValorMaiorQueSaldo_Espero_ErroDeSaudoInsuficiente()
+            {
+                decimal saldo = 100;
+                decimal valor = 200;
+
+                sut.SetSaldo(saldo);
+
+                sut.Invoking(p => p.DecrementarSaldo(valor)).Should().Throw<RegraDeNegocioExcecao>();
+            }
+        }
+
+        public class SetStatusMetodo : ContaTestes
+        {
+            [Theory]
+            [InlineData(-1)]
+            [InlineData(0)]
+            [InlineData(4)]
+            public void Dado_StatusValorMenorQueZeroOuMaiorQueTres_Espero_RegraDeNegocioExcecao(int status)
+            {
+                sut.Invoking(p => p.SetStatus(status)).Should().Throw<RegraDeNegocioExcecao>();
+            }
+
+            [Theory]
+            [InlineData(1)]
+            [InlineData(2)]
+            [InlineData(3)]
+            public void Dado_StatusValorEntreUmETres_Espero_NenhumaExcecao(int status)
+            {
+                sut.Invoking(p => p.SetStatus(status)).Should().NotThrow<RegraDeNegocioExcecao>();
+            }
+
+
+            [Fact]
+            public void Dado_StatusAtivo_Espero_RegistroAtivo()
+            {
+                var status = AtivoInativoEnum.Ativo;
+
+                sut.SetStatus(status);
+
+                sut.Status.Should().Be(AtivoInativoEnum.Ativo);
+            }
+
+            [Fact]
+            public void Dado_StatusInativo_Espero_RegistroInativo()
+            {
+                var status = AtivoInativoEnum.Inativo;
+
+                sut.SetStatus(status);
+
+                sut.Status.Should().Be(AtivoInativoEnum.Inativo);
+            }
+
+            [Fact]
+            public void Dado_StatusExcluido_Espero_RegistroExcluido()
+            {
+                var status = AtivoInativoEnum.Excluido;
+
+                sut.SetStatus(status);
+
+                sut.Status.Should().Be(AtivoInativoEnum.Excluido);
+            }
+        }
+
+        public class VerificaSeEstaAtivaMetodo : ContaTestes
+        {
+            [Fact]
+            public void Dado_ContaInativa_Espero_Verdadeiro()
+            {
+                var status = AtivoInativoEnum.Inativo;
+
+                sut.SetStatus(status);
+
+                sut.VerificaSeEstaInativa().Should().BeTrue();
+            }
+
+            [Fact]
+            public void Dado_ContaAtiva_Espero_Falso()
+            {
+                var status = AtivoInativoEnum.Ativo;
+
+                sut.SetStatus(status);
+
+                sut.VerificaSeEstaInativa().Should().BeFalse();
+            }
+        }
     }
 }
