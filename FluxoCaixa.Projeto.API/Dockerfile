@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 
 # Copy the csproj and restore all of the nugets
-COPY *.csproj ./
+COPY ./*.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
