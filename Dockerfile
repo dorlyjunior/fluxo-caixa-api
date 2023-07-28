@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
-ENV ASPNETCORE_ENVIRONMENT=Docker
+ENV ASPNETCORE_ENVIRONMENT=Development
 WORKDIR /
 COPY . .
 RUN dotnet restore
