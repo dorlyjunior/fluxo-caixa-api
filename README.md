@@ -17,7 +17,7 @@ Projeto de Fluxo de Caixa simplificado.
 * Executar ``` docker compose -f docker-compose.docker.wsl.yml build ``` e depois ``` docker compose -f docker-compose.docker.wsl.yml up ```
 * Acessar ``` <ip-do-wsl>:5001/swagger ```
 
-  **Via Visual Studio**
+**Via Visual Studio**
 
 * Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
 * Instalar o Postgres na máquina;
