@@ -2,9 +2,28 @@
 Projeto de Fluxo de Caixa simplificado.
 
 # Instruções de Uso
-* Os Scripts do banco de dados estão em DB/scripts;
-* O schema é o **public** padrão do Postgres;
-* A API é uma aplicação .NET Core e pode ser rodada no Visual Studio ou VS Code via linha comando.
+
+**Docker**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Executar ``` docker compose build ``` e depois ``` docker compose up```
+* Acessar ``` localhost:5001/swagger ```
+
+**Docker dentro do WSL**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Descobrir o IP do WSL com ``` wsl hostname -i ```
+* Alterar a string de conexão do banco em https://github.com/dorlyjunior/fluxo-caixa-api/blob/develop/FluxoCaixa.Projeto.API/appsettings.DockerWSL.json#L3
+* Executar ``` docker compose -f docker-compose.docker.wsl.yml build ``` e depois ``` docker compose -f docker-compose.docker.wsl.yml up ```
+* Acessar ``` <ip-do-wsl>:5001/swagger ```
+
+  **Via Visual Studio**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Instalar o Postgres na máquina;
+* Rodar os scripts em DB/scripts no schema public no banco de dados;
+* Fazer o build e rodar a aplicação pelo Visual Studio.
+* Acessar ``` localhost:5001/swagger ```
 
 # Visão de negócio
 
