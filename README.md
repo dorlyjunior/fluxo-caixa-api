@@ -213,13 +213,21 @@ Neste exemplo temos a relação entre as classes na composição das camadas.
 
 ## Estrutura dos Testes Unitários
 
+A estrura de classes dos testes unitários é:
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/007.png)
+
+Existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
+
 A estrutura dos testes unitários segue a seguinte ideia:
 
 Dado **CENÁRIO** Espero **RESULTADO**
 
+Ou seja, para cada cenário previsto ter um resultado esperado.
+
 **EXEMPLO**
 
-IMAGEM
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/008.png)
 
 ## Diagrama Relacional de Dados
 
