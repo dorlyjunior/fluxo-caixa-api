@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
-ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_ENVIRONMENT=Docker
 WORKDIR /
 COPY . .
 RUN dotnet restore
 WORKDIR /FluxoCaixa.Projeto.API
-RUN dotnet publish -c Debug -o app/published-app
+RUN dotnet publish -c Release -o app/published-app
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
 WORKDIR /app

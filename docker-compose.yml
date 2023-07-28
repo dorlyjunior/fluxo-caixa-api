@@ -9,18 +9,20 @@ services:
     ports:
       - "5432:5432"
   fluxo-api:
-     image: fluxo-api
-     ports:
+      image: fluxo-api
+      ports:
        - 5001:80
-     build:
-       context: .
-       dockerfile: Dockerfile
-     links:
-       - postgres
-     depends_on:
-       - "postgres"
-     networks:
-       - rede
+      environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      build:
+        context: .
+        dockerfile: Dockerfile
+      links:
+        - postgres
+      depends_on:
+        - "postgres"
+      networks:
+        - rede
 
 networks:
   rede:
