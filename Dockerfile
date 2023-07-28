@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
-WORKDIR /app
+WORKDIR /
 COPY . .
 RUN dotnet restore
 RUN dotnet publish -o /app/published-app
