@@ -12,7 +12,7 @@ services:
      ports:
        - 5001:80
      build:
-       context: ./FluxoCaixa.Projeto.API
+       context: .
        dockerfile: Dockerfile
      links:
        - postgres
