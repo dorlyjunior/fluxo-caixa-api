@@ -217,7 +217,7 @@ A estrura de classes dos testes unitários é:
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/007.png)
 
-Existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
+Neste caso, existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
 
 A estrutura dos testes unitários segue a seguinte ideia:
 
@@ -238,3 +238,7 @@ Ou seja, para cada cenário previsto ter um resultado esperado.
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/005.png)
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/006.png)
+
+# Conclusão
+
+Com esta análise e implementação, tivemos a oportunidade de entender a visão de negócio e a visão técnica para o problema de lançamento de créditos e débitos em caixa. Foram considerados ambos requisitos funcionais e não funcionais com a finalidade de atingir o resultado esperado de forma sustentável e escalável.
