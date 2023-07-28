@@ -25,6 +25,27 @@ Projeto de Fluxo de Caixa simplificado.
 * Fazer o build e rodar a aplicação pelo Visual Studio.
 * Acessar ``` localhost:5001/swagger ```
 
+## Navegando entre os endpoints
+
+A aplicação está divida em dois módulos:
+
+* Seguranca
+* Caixa
+
+Basta clicar no select no topo do Swagger para navegar entre os endpoints.
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/009.png)
+
+## Autenticando na API
+
+Basta clicar no endpoint /api/autenticacao e informar as credenciais padrões para obter o JWT.
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/010.png)
+
+O token será gerado, é importante copiá-lo, seguir para o módulo de Caixa, clicar em **Authorize** e colar Bearer + JWT copiado.
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/011.png)
+
 # Visão de negócio
 
 Nesta seção veremos a análise da solução sob um ponto de vista de negócio.
