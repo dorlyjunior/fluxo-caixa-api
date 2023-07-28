@@ -38,6 +38,7 @@ Nesta seção veremos a análise da solução sob um ponto de vista de negócio.
 * Escalabilidade;
 * Observabilidade;
 * Segurança;
+* Manutenabilidade do código
 
 ## Análise sobre os dados
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/001.png)
@@ -123,7 +124,11 @@ Nestes casos a aplicação fará o seguinte:
 * Status;
 
 ### Consultar auditoria
-É possível consultar as ações realizadas no sistema. Os filtros disponíveis são o nome do usuário, data da ação e descrição da ação.
+É possível consultar as ações realizadas no sistema. Os filtros disponíveis são: 
+
+* Nome do usuário;
+* Data da ação;
+* Descrição da ação.
 
 # Visão Técnica
 
@@ -158,6 +163,9 @@ A API que possui as funcionalidade do caixa é um microserviço stateless que po
 ### Observabilidade
 A solução possui um log em arquivo que registra todos os erros, exceções e informações do sistema a fim de ter um rastro de todas as atividades da aplicação. Para antigir seu potencial máximo, é preciso reter estes logs em bancos especializados em logs, em aplicações que permitem organizar estes dados em painéis visuais e criar alertas para casos críticos.
 
+### Manutenabilidade do Código
+Explorando conceitos de Arquitetura Limpa, Código Limpo e SOLID, a estrutura de código disponível busca ser clara para quem lê e ser extensível e escalável para quem escreve. As responsabilidades de cada tipo de funcionalidade são delegadas para camadas específicas enquanto que as regras de negócio são concentradas no domínio do problema.
+
 ## Estrutura da Solução
 
 O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do código e sua escala de crescimento no médio/longo prazo. A proposta foca em isolar as regras de negócio no contexto de domínio enquanto que os demais componentes servem como orquestradores das funcionalidades.
@@ -188,6 +196,30 @@ O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/004.png)
 
 Neste exemplo temos a relação entre as classes na composição das camadas.
+
+| Classe | Descrição |
+| ------ | ------ |
+| ContasController | Controller com os endpoints do serviço. |
+| ContaResponse | Classe que representa uma resposta dos dados de Conta. |
+| IContasAppServico | Interface com os métodos da classe de aplicação. |
+| ContasAppServico | Serviço de aplicação com os métodos orquestradores do domínio de Conta. |
+| Conta | Classe que representa o domínio de conta. |
+| IContasServico | Interface com os métodos da classe de serviço. |
+| ContasServico | Interface com os métodos da classe de domínio. |
+| IContaRepositorio | Interface com os métodos da classe de repositório. |
+| ContasRepositorioAsync | Classe de repositório que representa a integração com o banco de dados. |
+| ContaTestes | Classe de testes unitários da entidade de domínio Conta. |
+| ContaServicosTestes | Classe de testes unitários do serviço de domínio ContasServico |
+
+## Estrutura dos Testes Unitários
+
+A estrutura dos testes unitários segue a seguinte ideia:
+
+Dado **CENÁRIO** Espero **RESULTADO**
+
+**EXEMPLO**
+
+IMAGEM
 
 ## Diagrama Relacional de Dados
 
