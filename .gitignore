@@ -10,6 +10,11 @@
 *.sln.docstates
 *.vcxproj.filters
 dist/
+FluxoCaixa.Projeto.Testes/coveragereport
+FluxoCaixa.Projeto.Testes/TestResults
+deploy/
+FluxoCaixa.Projeto.API/deploy
+Logs/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

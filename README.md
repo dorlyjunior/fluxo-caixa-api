@@ -3,7 +3,31 @@ Projeto de Fluxo de Caixa simplificado.
 
 # Instruções de Uso
 
+**Docker**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Executar ``` docker compose build ``` e depois ``` docker compose up```
+* Acessar ``` localhost:5001/swagger ```
+
+**Docker dentro do WSL**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Descobrir o IP do WSL com ``` wsl hostname -i ```
+* Alterar a string de conexão do banco em https://github.com/dorlyjunior/fluxo-caixa-api/blob/develop/FluxoCaixa.Projeto.API/appsettings.DockerWSL.json#L3
+* Executar ``` docker compose -f docker-compose.docker.wsl.yml build ``` e depois ``` docker compose -f docker-compose.docker.wsl.yml up ```
+* Acessar ``` <ip-do-wsl>:5001/swagger ```
+
+**Via Visual Studio**
+
+* Clonar este repositório ``` git clone  https://github.com/dorlyjunior/fluxo-caixa-api.git```
+* Instalar o Postgres na máquina;
+* Rodar os scripts em DB/scripts no schema public no banco de dados;
+* Fazer o build e rodar a aplicação pelo Visual Studio.
+* Acessar ``` localhost:5001/swagger ```
+
 # Visão de negócio
+
+Nesta seção veremos a análise da solução sob um ponto de vista de negócio.
 
 ## Requisitos funcionais
 * Fazer lançamentos de crédito e débito em um caixa;
@@ -14,6 +38,7 @@ Projeto de Fluxo de Caixa simplificado.
 * Escalabilidade;
 * Observabilidade;
 * Segurança;
+* Manutenabilidade do código
 
 ## Análise sobre os dados
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/001.png)
@@ -78,6 +103,16 @@ Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a d
 
 > **Regra**: Um lançamento só pode ser realizado enquanto o dia está em aberto. Uma vez consolidado não é possíve fazer lançamentos naquele dia.
 
+### Remover um crédito ou débito
+Um lançamento de crédito ou débito pode ser removido. É preciso informar o ID único e o ID da transação do lançamento.
+
+Nestes casos a aplicação fará o seguinte:
+
+* Para remoção de lançamento de crédito, irá cancelar a transação e criar um lançamento de débito para balancear o saldo.
+* Para remoção de lançamento de débito, irá cancelar a transação e criar um lançamento de crédito para balancear o saldo.
+
+> **Regra**: Uma vez cancelado, um lançamento não pode ser mais removido;
+
 ### Consultar relatório de consolidado diário
 É possível consultar os dados do consolidado diário. Os filtros disponíveis são:
 * Data do dia;
@@ -89,9 +124,15 @@ Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a d
 * Status;
 
 ### Consultar auditoria
-É possível consultar as ações realizadas no sistema. Os filtros disponíveis são o nome do usuário, data da ação e descrição da ação.
+É possível consultar as ações realizadas no sistema. Os filtros disponíveis são: 
+
+* Nome do usuário;
+* Data da ação;
+* Descrição da ação.
 
 # Visão Técnica
+
+Nesta seção, iremos conferir a visão técnica da solução.
 
 ## Arquitetura de Referência
 
@@ -121,6 +162,9 @@ A API que possui as funcionalidade do caixa é um microserviço stateless que po
 
 ### Observabilidade
 A solução possui um log em arquivo que registra todos os erros, exceções e informações do sistema a fim de ter um rastro de todas as atividades da aplicação. Para antigir seu potencial máximo, é preciso reter estes logs em bancos especializados em logs, em aplicações que permitem organizar estes dados em painéis visuais e criar alertas para casos críticos.
+
+### Manutenabilidade do Código
+Explorando conceitos de Arquitetura Limpa, Código Limpo e SOLID, a estrutura de código disponível busca ser clara para quem lê e ser extensível e escalável para quem escreve. As responsabilidades de cada tipo de funcionalidade são delegadas para camadas específicas enquanto que as regras de negócio são concentradas no domínio do problema.
 
 ## Estrutura da Solução
 
@@ -152,6 +196,42 @@ O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/004.png)
 
 Neste exemplo temos a relação entre as classes na composição das camadas.
+
+| Classe | Descrição |
+| ------ | ------ |
+| ContasController | Controller com os endpoints do serviço. |
+| ContaResponse | Classe que representa uma resposta dos dados de Conta. |
+| IContasAppServico | Interface com os métodos da classe de aplicação. |
+| ContasAppServico | Serviço de aplicação com os métodos orquestradores do domínio de Conta. |
+| Conta | Classe que representa o domínio de conta. |
+| IContasServico | Interface com os métodos da classe de serviço. |
+| ContasServico | Interface com os métodos da classe de domínio. |
+| IContaRepositorio | Interface com os métodos da classe de repositório. |
+| ContasRepositorioAsync | Classe de repositório que representa a integração com o banco de dados. |
+| ContaTestes | Classe de testes unitários da entidade de domínio Conta. |
+| ContaServicosTestes | Classe de testes unitários do serviço de domínio ContasServico |
+
+## Estrutura dos Testes Unitários
+
+A estrura de classes dos testes unitários é:
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/007.png)
+
+Existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
+
+A estrutura dos testes unitários segue a seguinte ideia:
+
+Dado **CENÁRIO** Espero **RESULTADO**
+
+Ou seja, para cada cenário previsto ter um resultado esperado.
+
+**EXEMPLO**
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/008.png)
+
+## Diagrama Relacional de Dados
+
+![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/develop/DB/scripts/diagrama-relacional.png)
 
 # Endpoints da API
 

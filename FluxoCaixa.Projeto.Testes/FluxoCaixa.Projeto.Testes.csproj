@@ -29,8 +29,4 @@
     <ProjectReference Include="..\FluxoCaixa.Projeto.Dominio\FluxoCaixa.Projeto.Dominio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Caixa\Contas\Servicos\" />
-  </ItemGroup>
-
 </Project>

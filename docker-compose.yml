@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:14
+    container_name: "postgres"
+    volumes:
+      - ./DB/scripts/public.sql:/docker-entrypoint-initdb.d/public.sql
+    environment:
+      POSTGRES_PASSWORD: "123456"
+    ports:
+      - "5432:5432"
+  fluxo-api:
+      image: fluxo-api
+      ports:
+       - 5001:80
+      environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      build:
+        context: .
+        dockerfile: Dockerfile
+      links:
+        - postgres
+      depends_on:
+        - "postgres"
+      networks:
+        - rede
+
+networks:
+  rede:
+     driver: bridge
