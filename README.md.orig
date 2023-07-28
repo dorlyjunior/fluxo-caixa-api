@@ -25,27 +25,6 @@ Projeto de Fluxo de Caixa simplificado.
 * Fazer o build e rodar a aplicação pelo Visual Studio.
 * Acessar ``` localhost:5001/swagger ```
 
-## Navegando entre os endpoints
-
-A aplicação está divida em dois módulos:
-
-* Seguranca
-* Caixa
-
-Basta clicar no select no topo do Swagger para navegar entre os endpoints.
-
-![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/009.png)
-
-## Autenticando na API
-
-Basta clicar no endpoint /api/autenticacao e informar as credenciais padrões para obter o JWT.
-
-![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/010.png)
-
-O token será gerado, é importante copiá-lo, seguir para o módulo de Caixa, clicar em **Authorize** e colar Bearer + JWT copiado.
-
-![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/011.png)
-
 # Visão de negócio
 
 Nesta seção veremos a análise da solução sob um ponto de vista de negócio.
@@ -218,6 +197,8 @@ O principal objetivo da arquitetura proposta é facilitar a manutenabilidade do 
 
 Neste exemplo temos a relação entre as classes na composição das camadas.
 
+<<<<<<< HEAD
+=======
 | Classe | Descrição |
 | ------ | ------ |
 | ContasController | Controller com os endpoints do serviço. |
@@ -238,7 +219,7 @@ A estrura de classes dos testes unitários é:
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/007.png)
 
-Neste caso, existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
+Existe uma classe representando a entidade ou serviço a ser testado, cada método destas classes é representado por uma classe interna e cada classe interna possui seu conjunto de cenários de testes. O objetivo desta organização é ter um visão clara da origem de cada teste e sobre o que está sendo testado.
 
 A estrutura dos testes unitários segue a seguinte ideia:
 
@@ -254,12 +235,9 @@ Ou seja, para cada cenário previsto ter um resultado esperado.
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/develop/DB/scripts/diagrama-relacional.png)
 
+>>>>>>> release/1.0.0
 # Endpoints da API
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/005.png)
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/006.png)
-
-# Conclusão
-
-Com esta análise e implementação, tivemos a oportunidade de entender a visão de negócio e a visão técnica para o problema de lançamento de créditos e débitos em caixa. Foram considerados ambos requisitos funcionais e não funcionais com a finalidade de atingir o resultado esperado de forma sustentável e escalável.
