@@ -122,7 +122,7 @@ Um lançamento pode ser de crédito ou débito. É preciso informar a conta, a d
 
 > **Regra**: Um lançamento de débito não pode ser maior que o saldo em conta;
 
-> **Regra**: Um lançamento só pode ser realizado enquanto o dia está em aberto. Uma vez consolidado não é possíve fazer lançamentos naquele dia.
+> **Regra**: Um lançamento só pode ser realizado enquanto o dia está em aberto. Uma vez consolidado não é possível fazer lançamentos naquele dia.
 
 ### Remover um crédito ou débito
 Um lançamento de crédito ou débito pode ser removido. É preciso informar o ID único e o ID da transação do lançamento.
@@ -234,7 +234,7 @@ Neste exemplo temos a relação entre as classes na composição das camadas.
 
 ## Estrutura dos Testes Unitários
 
-A estrura de classes dos testes unitários é:
+A estrutura de classes dos testes unitários é:
 
 ![Alt text](https://github.com/dorlyjunior/fluxo-caixa-api/blob/master/Docs/imagens/007.png)
 
@@ -242,7 +242,7 @@ Neste caso, existe uma classe representando a entidade ou serviço a ser testado
 
 A estrutura dos testes unitários segue a seguinte ideia:
 
-Dado **CENÁRIO** Espero **RESULTADO**
+Quando/Dado **CENÁRIO** Espero **RESULTADO**
 
 Ou seja, para cada cenário previsto ter um resultado esperado.
 
